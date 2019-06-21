@@ -1,0 +1,156 @@
+<div class="container register-form">
+    <div class="form">
+        <div class="note text-center">
+            <!--<p>Gestion de procesos en tiempo real</p>-->
+            <h2 class="section-title mb-2 h4 align-items-center">Gestion de procesos en tiempo real</h2>
+        </div>
+
+        <div class="form-content">
+
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <span *ngIf="conexionServer" class="label label-success badge badge-pill badge-success">Conexion con el servidor</span>
+                    <span *ngIf="!conexionServer" class="label label-warning badge badge-pill badge-danger">Conexion con el servidor</span>
+                </div>
+                <div class="col-md-6">
+                    <span *ngIf="conexionUserJava" class="label label-success badge badge-pill badge-success">Conexion con Usuario JAVA</span>
+                    <span *ngIf="!conexionUserJava" class="label label-warning badge badge-pill badge-danger">Conexion con Usuario JAVA</span>
+                </div>
+
+            </div>
+
+
+            <!--TABLA-->
+
+
+            <div class="loading  row col-md-12" *ngIf="estado_simulacion=='SIMULACION EN PROCESO'">
+
+                <img src="assets/simulacion.gif" style="height: 100px; float: none;margin: 0 auto; " />
+
+            </div>
+            <div class="loading  row col-md-12" *ngIf="estado_simulacion=='SIMULACION EN PAUSA'">
+
+                <img src="assets/simulacionpause.png" style="height: 100px; float: none;margin: 0 auto; " />
+
+            </div>
+
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Nombre</th>
+                            <th class="text-center" scope="col">PID</th>
+                            <th class="text-center" scope="col">Llegada</th>
+                            <th class="text-center" scope="col">Rafaga</th>
+                            <th class="text-center" scope="col">Prioridad</th>
+                            <th class="text-center" scope="col">Descripción</th>
+                            <th class="text-center" scope="col">Restante</th>
+                            <th class="text-center" scope="col">Usuario</th>
+                            <th class="text-center" scope="col">Estado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let proceso of procesos" [ngClass]="{'table-danger': proceso.estado=='LISTO', 'table-primary': proceso.estado=='EJECUCION'}">
+
+                            <td class="text-center">{{proceso.nombre}}</td>
+                            <td class="text-center">{{proceso.pid}}</td>
+                            <td class="text-center">{{proceso.tiempoLlegada}}</td>
+                            <td class="text-center">{{proceso.rafaga}}</td>
+                            <td class="text-center">{{proceso.prioridad}}</td>
+                            <td class="text-center">{{proceso.descripcion}}</td>
+                            <td class="text-center">{{proceso.rafaga-proceso.reemplazosRealizados}}</td>
+                            <td class="text-center">{{proceso.usuario}}</td>
+                            <td class="text-center">{{proceso.estado}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PROGRESS-BARR -->
+            <div class="col-sm-4">
+                <div class="progressbar">
+                    <div class="second circle" data-percent="77">
+                        <strong></strong>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-monospace text-muted h6">Procesos terminados {{procesosTerminados.length}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-monospace text-muted h6">Tiempo de Simulación:<span class="label label-success badge badge-pill badge-success"> {{tiempoSimulacion*tiempoHilo}}</span> ms || <span class="label label-success badge badge-pill badge-success"> {{tiempoSimulacion}}</span> s</p>
+                </div>
+            </div>
+            <!--TABLA-->
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Nombre</th>
+                            <th class="text-center" scope="col">Llegada</th>
+                            <th class="text-center" scope="col">Rafaga</th>
+                            <th class="text-center" scope="col">Prioridad</th>
+                            <th class="text-center" scope="col">TurnaRound</th>
+                            <th class="text-center" scope="col">T. Final</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let proceso of procesosTerminados">
+                            <td class=" text-center ">{{proceso.nombre}}</td>
+                            <td class="text-center ">{{proceso.tiempoLlegada}}</td>
+                            <td class="text-center ">{{proceso.rafaga}}</td>
+                            <td class="text-center ">{{proceso.prioridad}}</td>
+                            <td class="text-center ">{{proceso.turnaRound}}</td>
+                            <td class="text-center ">{{proceso.tiempoFinal}} ms</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--<div class="row ">
+              <div class="col-md-6 ">
+                  <div class="form-group ">
+                      <input type="text " class="form-control " placeholder="Your Name * " value=" "/>
+                  </div>
+                  <div class="form-group ">
+                      <input type="text " class="form-control " placeholder="Phone Number * " value=" "/>
+                  </div>
+              </div>
+              <div class="col-md-6 ">
+                  <div class="form-group ">
+                      <input type="text " class="form-control " placeholder="Your Password * " value=" "/>
+                  </div>
+                  <div class="form-group ">
+                      <input type="text " class="form-control " placeholder="Confirm Password * " value=" "/>
+                  </div>
+              </div>
+          </div>-->
+            <div class="container">
+                <div class="row">
+                    <button (click)="crearGrafica()" type="button " style="background: -webkit-linear-gradient(left, #0072ff, #8811c5);" class="btnSubmit col-md-4">Grafico de Comportamiento</button>
+                </div>
+            </div>
+
+            <!--GRAFICA-->
+            <div class="row">
+                <div class="cont-grafica-tiempo">
+
+                    <canvas #canvasGraf width="1000" height="600"></canvas>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.cont-estados {
+    margin-left: 10px;
+    border: 1px solid #18AA1E;
+    border-radius: 15px;
+    background-color: #18AA1E;
+    padding: 2px 10px;
+}
+
+.cont-estados span {
+    color: white;
+    font-weight: bold;
+}
