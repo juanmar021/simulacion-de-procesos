@@ -1,27 +1,19 @@
-# MultiacabadosWeb
+# Simulación de procesos
+ Este proyecto consta de 3 subproyectos:
+Para que este proyecto se pueda ejecutar deber tener inicializado los 3 al tiempo
+ 
+ ###Gestion procesos Escritorio
+ Esta escrito en JAVA Netbeans, es donde se optienen los procesos del sistema operativo y se realiza la simulación
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
+###Gestion procesos web
+Es donde se muestra los resultados de la simulacion en tiempo real mediante Sockets, Recuerde cambiar
+la constante IP_SERVER por la de su servidor
 
-## Development server
+para ejecutar este proyecto debe ejecutar en la carpeta del proyecto el comando npm install y asi bajar los modulos de node
+Luego debe ejecutar ng serve -o y luego abrir en su navegador la direccion `http://localhost:4200/`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+ ###Gestion procesos server js
+ Este proyecto establece la comunicación entre la app de escritorio y parte web usando Sockets
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ para ejecutar este proyecto debe ejecutar en la carpeta del proyecto el comando npm install y asi bajar los modulos de node
+Luego ejecutar node server/server para asi iniciar el servidor
